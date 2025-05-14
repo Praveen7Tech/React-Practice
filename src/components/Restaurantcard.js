@@ -11,9 +11,9 @@ const Restaurantcard = ({resData}) => {
              />
             <h3>{name}</h3>
             <h3>{cuisine}</h3>
-            <h3>{starRating}</h3>
-            <h3>{price}</h3>
-            <h3>{timeToDelivery}</h3>
+            <h3>{starRating} Star Ratings</h3>
+            <h3>₹ {price}</h3>
+            <h3>{timeToDelivery} Delivery Time</h3>
         </div>
     )
 }
