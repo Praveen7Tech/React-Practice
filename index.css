@@ -68,3 +68,8 @@
 .filter {
     display: flex;
 }
+
+.nav-ul {
+    text-decoration: none;
+    color: black;
+}

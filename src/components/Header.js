@@ -16,10 +16,10 @@ const Header = () => {
                 <img className="logo" src={LOGO_URL}/>
             </div>
             <div className="nav-Items">
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
+                <ul className="nav-ul">
+                    <li><Link to="/" className="nav-ul">Home</Link></li>
+                    <li><Link to="/about" className="nav-ul">About Us</Link></li>
+                    <li><Link to="/contact" className="nav-ul">Contact</Link></li>
                     <li>Cart</li>
                     <button className="login" onClick={() => {
                         LoginBtn === "Login" ? setLogoutBtn("Logout") : setLogoutBtn("Login")

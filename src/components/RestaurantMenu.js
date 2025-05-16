@@ -18,8 +18,7 @@ const RestaurantMenu = () => {
     const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
     // Find the one restaurant that matches the resId
-    const matchedRestaurant = restaurants.find(
-      (res) => res.info.parentId === resId
+    const matchedRestaurant = restaurants.find((res) => res.info.parentId === resId
     );
 
     setRestaurant(matchedRestaurant?.info);
