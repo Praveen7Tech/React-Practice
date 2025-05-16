@@ -59,7 +59,7 @@ const Body = () => {
             <div className="restro-container">
                 {filteredRestaurants.map((restaurant) => (
                     <Restaurantcard key={restaurant.info.parentId} resData={restaurant}/>
-                ))},
+                ))}
 
                 {/* for filterin values to render while using mockData(dummy)
                 {filteredRestaurants.map((restaurant, index) => (
