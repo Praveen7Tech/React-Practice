@@ -1,7 +1,8 @@
 import Restaurantcard from "./Restaurantcard";
-import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import { API_URL } from "../utils/constants";
 
 
 const Body = () => {
@@ -19,7 +20,7 @@ const Body = () => {
 
     // api call to fetch data
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=9.9312328&lng=76.26730409999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const data = await fetch(API_URL)
 
         const json = await data.json()
         setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
@@ -27,11 +28,8 @@ const Body = () => {
         setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
 
-    // add shimmer ui while page loading  / conditional rendering
-    // if(ListOfRestaurants.length === 0) {
-    //     return <Shimmer />
-    // }
-
+    
+    
     return ListOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
             <div className="filter">
@@ -58,13 +56,12 @@ const Body = () => {
             </div>
             <div className="restro-container">
                 {filteredRestaurants.map((restaurant) => (
-                    <Restaurantcard key={restaurant.info.parentId} resData={restaurant}/>
+                <Link 
+                   key={restaurant.info.parentId}
+                   to={"/restaurants/"+restaurant.info.parentId}>
+                    <Restaurantcard  resData={restaurant}/> 
+                </Link> 
                 ))}
-
-                {/* for filterin values to render while using mockData(dummy)
-                {filteredRestaurants.map((restaurant, index) => (
-                    <Restaurantcard key={index} resData={restaurant}/>
-                ))} */}
             </div>
         </div>
     )
