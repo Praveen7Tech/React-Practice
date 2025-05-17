@@ -1,34 +1,27 @@
 import Restaurantcard from "./Restaurantcard";
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { API_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useBody from "../utils/useBody";
 
 
 const Body = () => {
 
-    // useState - Hooks
-    const [ListOfRestaurants, setListOfRestaurant] = useState([]) 
-    const [filteredRestaurants, setFilteredRestaurants] = useState([])
-
-    const [searchValue, setSearchValue] = useState("")
+    const {
+        ListOfRestaurants,
+        filteredRestaurants,
+        setFilteredRestaurants,
+        searchValue,
+        setSearchValue
+    } = useBody()
     
-
-    useEffect(() => {
-        fetchData()
-    }, [])
-
-    // api call to fetch data
-    const fetchData = async () => {
-        const data = await fetch(API_URL)
-
-        const json = await data.json()
-        setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-        // updte filterd state variable after fectch all data for filtering(search)
-        setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    // online status
+    const onlineStatus = useOnlineStatus()
+    if(onlineStatus === false){
+        return (
+            <h1>Looks like you are in Offline!! please check your Internet connection..</h1>
+        )
     }
-
-    
     
     return ListOfRestaurants.length === 0 ? <Shimmer /> : (
         <div className="body">
