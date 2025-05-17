@@ -5,20 +5,33 @@ class UserClass extends React.Component {
         super(props)
         // creating state variable in class Component
         this.state = {
-            count: 0,
-            count2: 1
+            userInfo : {
+                name : "dummmy name",
+                location : "location",
+                avatar_url:""
+            }
         }
     }
+
+    // api call
+    async componentDidMount() {
+        const data = await fetch("https://api.github.com/users/Pr4veeen")
+        const json = await data.json()
+
+        // updted local state variable
+        this.setState({
+            userInfo: json
+        })
+        console.log(json)
+    }
+
     render() {
-        const {count, count2} = this.state
-        const {name} = this.props
+        const {login, avatar_url, html_url} = this.state.userInfo
         return (
             <div className="user-card">
-                <h2>Count : {count}</h2>
-                <h2>Count2 : {count2}</h2>
-                <h2>Name : Praveen, {name}</h2>
-                <h3>E-mail : praveen@gmail.com</h3>
-                <h3>Location : Kochi</h3>
+                <img src={avatar_url}/>
+                <h2>Name : {login} </h2>
+                <h3>E-mail : {html_url}</h3>
             </div>
         )
     }
