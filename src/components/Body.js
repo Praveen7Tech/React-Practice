@@ -1,4 +1,4 @@
-import Restaurantcard from "./Restaurantcard";
+import Restaurantcard, {withVegLabel} from "./Restaurantcard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -14,6 +14,11 @@ const Body = () => {
         searchValue,
         setSearchValue
     } = useBody()
+
+    // HOC
+    const RestaurantCardVegitarian = withVegLabel(Restaurantcard)
+
+    console.log("list of rest",ListOfRestaurants)
     
     // online status
     const onlineStatus = useOnlineStatus()
@@ -55,7 +60,9 @@ const Body = () => {
                    key={restaurant.info.parentId}
                    to={"/restaurants/"+restaurant.info.parentId} 
                    style={{ textDecoration: "none", color: "black" }}>
-                    <Restaurantcard  resData={restaurant}/> 
+                    {restaurant.info?.veg ? (<RestaurantCardVegitarian resData={restaurant}/>) :
+                    (<Restaurantcard  resData={restaurant}/>) 
+                    } 
                 </Link> 
                 ))}
             </div>
