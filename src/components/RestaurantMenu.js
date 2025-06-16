@@ -16,7 +16,7 @@ const RestaurantMenu = () => {
 
   
   const AddToCart = ()=>{
-    dispatch(addItem("pizza"))
+    dispatch(addItem(restaurant))
   }
 
   return (
