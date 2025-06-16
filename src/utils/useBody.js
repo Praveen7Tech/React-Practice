@@ -18,6 +18,7 @@ const useBody = () => {
         setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
         // updte filterd state variable after fectch all data for filtering(search)
         setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        console.log("suii",json?.data?.cards)
     }
 
     return {

@@ -3,23 +3,29 @@ import React,{lazy,Suspense} from "react";
 import ReactDOM from "react-dom/client"
 import Header  from "./components/Header";
 import Body from "./components/Body";
-//import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import { Provider } from "react-redux";
 
 // Lazy loading
 const About = lazy(() => import("./components/About"))
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import AppStore from "./ReduxStore/AppStore";
+import Cart from "./components/Cart";
 
 
 
 const AppLayout = () => {
-    return <div className="app">
-        <Header />
-        <Outlet/>
-    </div>
+    return (
+    <Provider store={AppStore}>
+        <div className="app">
+            <Header />
+            <Outlet/>
+        </div>
+    </Provider>
+    )
 }
 
 const appRouter = createBrowserRouter([
@@ -46,6 +52,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <RestaurantMenu />
+            },
+            {
+                path: "/cart",
+                element: <Cart/>
             }
         ],
         errorElement: <Error />
